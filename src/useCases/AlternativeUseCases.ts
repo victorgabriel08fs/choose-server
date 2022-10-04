@@ -27,7 +27,7 @@ class AlternativeUseCases {
 
     async randomAlternatives() {
         const alternative1 = await getRandomAlternative1();
-        const alternative2 = await getRandomAlternative2({ alt1: alternative1.id });
+        const alternative2 = await getRandomAlternative2({ alt1: alternative1.id,type:alternative1.type });
 
         return [alternative1, alternative2];
 

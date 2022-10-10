@@ -85,6 +85,16 @@ class QuestionUseCases {
         return [sumAlt1, sumAlt2];
     }
 
+    async index() {
+        const votes = await prisma.question.findMany({
+            include: {
+                user: true,
+            }
+        });
+
+        return votes;
+    }
+
 }
 
 export const questionUseCases = new QuestionUseCases();

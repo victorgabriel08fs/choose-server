@@ -27,6 +27,12 @@ class QuestionController {
 
         return res.status(200).json(resultArray);
     }
+
+    async index(req: Request, res: Response) {
+        const result = await questionUseCases.index();
+
+        return res.status(200).json(result);
+    }
 }
 
 export const questionController = new QuestionController();

@@ -9,6 +9,12 @@ class UserController {
 
         return res.status(201).json(result);
     }
+
+    async index(req: Request, res: Response) {
+        const result = await userUseCases.index();
+
+        return res.status(200).json(result);
+    }
 }
 
 export const userController = new UserController();

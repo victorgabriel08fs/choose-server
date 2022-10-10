@@ -9,28 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.alternativeController = void 0;
-const AlternativeUseCases_1 = require("../useCases/AlternativeUseCases");
-class AlternativeController {
-    index(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const result = yield AlternativeUseCases_1.alternativeUseCases.index();
-            return res.status(200).json(result);
-        });
-    }
+exports.userController = void 0;
+const UserUseCases_1 = require("../useCases/UserUseCases");
+class UserController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { text } = req.body;
-            const result = yield AlternativeUseCases_1.alternativeUseCases.create({ text });
+            const { email, name, password } = req.body;
+            const result = yield UserUseCases_1.userUseCases.create({ email, name, password });
             return res.status(201).json(result);
         });
     }
-    randomAlternatives(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { userId } = req.params;
-            const result = yield AlternativeUseCases_1.alternativeUseCases.randomAlternatives({ userId });
-            return res.status(200).json(result);
-        });
-    }
 }
-exports.alternativeController = new AlternativeController();
+exports.userController = new UserController();

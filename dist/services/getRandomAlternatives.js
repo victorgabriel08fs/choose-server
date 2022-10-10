@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getRandomAlternative2 = exports.getRandomAlternative1 = void 0;
 const client_1 = require("../prisma/client");
-function getRandomAlternative1() {
+function getRandomAlternative1({ userId }) {
     return __awaiter(this, void 0, void 0, function* () {
         const alternativesCount = yield client_1.prisma.alternative.count();
         const skip = Math.floor(Math.random() * (alternativesCount - 1));
@@ -20,7 +20,7 @@ function getRandomAlternative1() {
     });
 }
 exports.getRandomAlternative1 = getRandomAlternative1;
-function getRandomAlternative2({ alt1, type }) {
+function getRandomAlternative2({ alt1, type, userId }) {
     return __awaiter(this, void 0, void 0, function* () {
         const alternativesCount = yield client_1.prisma.alternative.count({
             where: {
@@ -39,6 +39,39 @@ function getRandomAlternative2({ alt1, type }) {
                 type: type
             }
         });
+        const question = yield client_1.prisma.question.findFirst({
+            where: {
+                AND: [
+                    {
+                        OR: [{
+                                AND: [{
+                                        alt1: { equals: alt1 }
+                                    },
+                                    {
+                                        alt2: { equals: alternative[skip].id }
+                                    }]
+                            },
+                            {
+                                AND: [{
+                                        alt1: { equals: alternative[skip].id }
+                                    },
+                                    {
+                                        alt2: { equals: alt1 }
+                                    }
+                                ]
+                            }]
+                    },
+                    {
+                        userId: {
+                            equals: userId
+                        }
+                    }
+                ]
+            }
+        });
+        if (question != null) {
+            getRandomAlternative1({ userId });
+        }
         return alternative[skip];
     });
 }

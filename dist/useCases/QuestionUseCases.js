@@ -13,11 +13,11 @@ exports.questionUseCases = void 0;
 const AppError_1 = require("../errors/AppError");
 const client_1 = require("../prisma/client");
 class QuestionUseCases {
-    create({ alt1, alt2, choose }) {
+    create({ alt1, alt2, choose, userId }) {
         return __awaiter(this, void 0, void 0, function* () {
             const question = yield client_1.prisma.question.create({
                 data: {
-                    alt1, alt2, choose
+                    alt1, alt2, choose, userId
                 }
             });
             if (!question) {

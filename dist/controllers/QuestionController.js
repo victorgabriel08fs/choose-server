@@ -14,8 +14,8 @@ const QuestionUseCases_1 = require("../useCases/QuestionUseCases");
 class QuestionController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { alt1, alt2, choose } = req.body;
-            const result = yield QuestionUseCases_1.questionUseCases.create({ alt1, alt2, choose });
+            const { alt1, alt2, choose, userId } = req.body;
+            const result = yield QuestionUseCases_1.questionUseCases.create({ alt1, alt2, choose, userId });
             return res.status(201).json(result);
         });
     }

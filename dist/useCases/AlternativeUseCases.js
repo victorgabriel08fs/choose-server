@@ -33,10 +33,10 @@ class AlternativeUseCases {
             return alternative;
         });
     }
-    randomAlternatives() {
+    randomAlternatives({ userId }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const alternative1 = yield (0, getRandomAlternatives_1.getRandomAlternative1)();
-            const alternative2 = yield (0, getRandomAlternatives_1.getRandomAlternative2)({ alt1: alternative1.id, type: alternative1.type });
+            const alternative1 = yield (0, getRandomAlternatives_1.getRandomAlternative1)({ userId });
+            const alternative2 = yield (0, getRandomAlternatives_1.getRandomAlternative2)({ alt1: alternative1.id, type: alternative1.type, userId });
             return [alternative1, alternative2];
         });
     }

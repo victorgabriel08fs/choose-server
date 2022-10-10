@@ -4,9 +4,9 @@ import { questionUseCases } from "../useCases/QuestionUseCases";
 class QuestionController {
 
     async create(req: Request, res: Response) {
-        const { alt1, alt2, choose } = req.body;
+        const { alt1, alt2, choose, userId } = req.body;
 
-        const result = await questionUseCases.create({ alt1, alt2, choose });
+        const result = await questionUseCases.create({ alt1, alt2, choose, userId });
 
         return res.status(201).json(result);
     }

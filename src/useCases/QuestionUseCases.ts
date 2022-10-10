@@ -3,10 +3,10 @@ import { prisma } from "../prisma/client";
 
 class QuestionUseCases {
 
-    async create({ alt1, alt2, choose }: { alt1: string, alt2: string, choose: string }) {
+    async create({ alt1, alt2, choose, userId }: { alt1: string, alt2: string, choose: string, userId: string }) {
         const question = await prisma.question.create({
             data: {
-                alt1, alt2, choose
+                alt1, alt2, choose, userId
             }
         });
 

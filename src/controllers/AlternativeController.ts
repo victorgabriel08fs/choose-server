@@ -17,7 +17,8 @@ class AlternativeController {
     }
 
     async randomAlternatives(req: Request, res: Response) {
-        const result = await alternativeUseCases.randomAlternatives();
+        const { userId } = req.params;
+        const result = await alternativeUseCases.randomAlternatives({ userId });
 
         return res.status(200).json(result);
     }

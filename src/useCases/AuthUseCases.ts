@@ -3,6 +3,7 @@ import CryptoJS from 'crypto-js';
 import { AppError } from "../errors/AppError";
 import { validateExpires } from "../services/auth-services";
 import moment from 'moment';
+import { MD5 } from "crypto-js";
 
 class AuthUseCases {
     async login({ email, password }: { email: string, password: string }) {
@@ -12,11 +13,8 @@ class AuthUseCases {
             }
         });
         if (user != null) {
-            var bytes = CryptoJS.AES.decrypt(user.password, 'victor');
-            console.log(bytes);
-            var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-            console.log(decryptedData);
-            if (decryptedData != password) {
+            var encryptedData = MD5(password).toString();
+            if (encryptedData != user.password) {
                 throw new AppError("Email or password invalid");
             }
             else {
